@@ -1,19 +1,37 @@
+Helper = require 'hubot-test-helper'
 chai = require 'chai'
 sinon = require 'sinon'
 chai.use require 'sinon-chai'
 
 expect = chai.expect
 
+helper = new Helper('./../src/vsts-slack.coffee')
+    
 describe 'vsts-slack', ->
+  room = null 
+  
   beforeEach ->
-    @robot =
-      respond: sinon.spy()
-      hear: sinon.spy()
+    room = helper.createRoom()
+    
+  afterEach ->
+    room.destroy()
+    
+  context 'user misspells project', ->
+    beforeEach -> 
+        room.user.say 'charlie', 'hubot vsts projec'
 
-    require('../src/vsts-slack')(@robot)
+    it 'should reply with nothing', ->
+      expect(room.messages).to.eql [
+          ['charlie', 'hubot vsts projec']
+      ]
 
-  it 'registers a respond listener', ->
-    expect(@robot.respond).to.have.been.calledWith(/hello/)
+  context 'user requests projects', ->
+    beforeEach -> 
+        room.user.say 'charlie', 'hubot vsts projects'
 
-  it 'registers a hear listener', ->
-    expect(@robot.hear).to.have.been.calledWith(/orly/)
+    it 'should reply with a list of projects', ->
+      expect(room.messages).to.eql [
+          ['charlie', 'hubot vsts projects'],
+          ['hubot', 'Retrieving list of VSTS projects...'],
+          ['hubot', '`projectx`, `projecty`']
+      ]

@@ -66,7 +66,7 @@ module.exports = (robot) ->
            .get() (err, _, prbody) ->
              if err
                res.send ":fire: An error was thrown in Node.js/CoffeeScript"
-               res.send error
+               res.send err
 
              pullRequests = (JSON.parse prbody).value
              if pullRequests.length > 0
@@ -128,7 +128,7 @@ retrieveProjects = (res, messageHeader) ->
       .get() (err, _, body) ->
         if err
           res.send ":fire: An error was thrown in Node.js/CoffeeScript"
-          res.send error
+          res.send err
 
         projects = JSON.parse body
         projectNames = []
