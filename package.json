@@ -7,10 +7,10 @@
   "keywords": "hubot, hubot-scripts, vsts, vso, Visual Studio Team Services",
   "repository": {
     "type": "git",
-    "url": "git://github.com/hubot-scripts/hubot-vsts-slack.git"
+    "url": "git://github.com/Mimeo/Hubot-VSTS-Slack.git"
   },
   "bugs": {
-    "url": "https://github.com/hubot-scripts/hubot-vsts-slack/issues"
+    "url": "https://github.com/Mimeo/Hubot-VSTS-Slack/issues"
   },
   "dependencies": {},
   "peerDependencies": {
