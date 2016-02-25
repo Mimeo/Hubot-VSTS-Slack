@@ -21,6 +21,13 @@ Then add **hubot-vsts-slack** to your `external-scripts.json`:
 ## Sample Interaction
 
 ```
-user1>> hubot hello
-hubot>> hello!
+user1>> hubot vsts projects
+hubot>> Retrieving list of VSTS projects...
+hubot>> Here's what I found:  `ProjectX`, `Visual Active Gibb++`,...
+```
+
+```
+user1>> hubot vsts ProjectX pullrequests
+hubot>> Hold on, checking for active PRs in `ProjectX` ...
+hubot>> Pull Request #1337 in ProjectRepo "This is my pull request title" http://contoso.visualstudio.com/DefaultCollection/projectx/_git/ProjectRepo/pullrequest/1337
 ```
