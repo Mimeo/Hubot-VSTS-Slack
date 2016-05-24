@@ -95,13 +95,13 @@ module.exports = (robot) ->
                     res.send "No active pull requests for #{project}" unless hasPullRequests
                 , 2000
 
-  robot.respond /vsts (.*) (newPBI|newProductBacklogItem|newStory|newBug) (.*)?$/i, (res) ->
+  robot.respond /vsts (.*) (newPBI|newProductBacklogItem|newStory|newBug) "(.*)"?$/i, (res) ->
     unless (ensureEnvironment res)
         project = res.match[1]
         pbiTitle = res.match[3]
         
         unless pbiTitle?
-            res.send "I think you may have forgotten to give me a title for the PBI. Please use the format `vsts <project> newPBI <title>`"
+            res.send "I think you may have forgotten to give me a title for the PBI. Please use the format `vsts <project> newPBI \"<title>\"`. Make sure the title is in double quotes."
             return
 
         waitMessage = res.random pbiWaitMessages
@@ -243,7 +243,7 @@ createPBIAttachment = (pbiDetails, showDetails) ->
                 },
                 {
                         title: "Created By"
-                        value: "`#{pbiDetails.fields['SystemCreatedBy']}`"
+                        value: "`#{pbiDetails.fields['System.CreatedBy']}`"
                         short: true
                 },
                 {
