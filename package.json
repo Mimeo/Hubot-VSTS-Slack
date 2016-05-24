@@ -1,7 +1,7 @@
 {
   "name": "hubot-vsts-slack",
   "description": "A Hubot script for Visual Studio Team Services integration tailored for Slack",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "Nithin Shenoy <nshenoy@mimeo.com>",
   "license": "MIT",
   "keywords": "hubot, hubot-scripts, vsts, vso, Visual Studio Team Services",
