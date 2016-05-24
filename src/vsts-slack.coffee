@@ -95,13 +95,13 @@ module.exports = (robot) ->
                     res.send "No active pull requests for #{project}" unless hasPullRequests
                 , 2000
 
-  robot.respond /vsts (.*) (newPBI|newProductBacklogItem|newStory|newBug) "(.*)"?$/i, (res) ->
+  robot.respond /vsts (.*) (newPBI|newProductBacklogItem|newStory|newBug) (.*)?$/i, (res) ->
     unless (ensureEnvironment res)
         project = res.match[1]
         pbiTitle = res.match[3]
         
         unless pbiTitle?
-            res.send "I think you may have forgotten to give me a title for the PBI. Please use the format `vsts <project> newPBI \"<title>\"`. Make sure the title is in double quotes."
+            res.send 'I think you may have forgotten to give me a title for the PBI. Please use the format `vsts <project> newPBI <title>`.'
             return
 
         waitMessage = res.random pbiWaitMessages
@@ -219,7 +219,7 @@ createPBIAttachment = (pbiDetails, showDetails) ->
     pbiTitle = pbiDetails.fields['System.Title']
     project = pbiDetails.fields['System.AreaPath']
     projectUrl = "#{vstsBaseUrl}/#{project}/_backlogs"
-    pbiUrl = "#{vstsBaseUrl}/#{project}/_workitems?id=#{pbiId}"
+    pbiUrl = "#{vstsBaseUrl}/#{project}/_workitems?id=#{pbiId}&_a=edit"
     attachment = 
         fallback: "Product Backlog Item #{pbiId} in #{project} \"#{pbiTitle}\" #{pbiUrl}"
         text: "<#{pbiUrl}|Product Backlog Item #{pbiId}> - \"#{pbiTitle}\" in <#{projectUrl}|#{project}>"
