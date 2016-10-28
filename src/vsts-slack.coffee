@@ -86,7 +86,7 @@ module.exports = (robot) ->
                                 for pr in pullRequests
                                     attachment = createPullRequestAttachment showDetails, pr, repositories[pr.repository.id], project                    
                                     
-                                    res.robot.adapter.customMessage
+                                    res.send
                                         channel: res.envelope.room
                                         username: res.robot.name
                                         attachments: [attachment]
@@ -138,7 +138,7 @@ module.exports = (robot) ->
                 pbiDetails = JSON.parse(body)
                 attachment = createPBIAttachment pbiDetails                    
                 
-                res.robot.adapter.customMessage
+                res.send
                     channel: res.envelope.room
                     username: res.robot.name
                     attachments: [attachment]
